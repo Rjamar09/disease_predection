@@ -1,19 +1,25 @@
 import pickle
 import streamlit as st
-
+from streamlit_option_menu import option_menu
 
 # loading the saved models
-diabetes_model = pickle.load(open('D:\pythonProject\disease-predection\saved_models\diabetes_model.sav', 'rb'))
-heart_disease_model = pickle.load(open('D:\pythonProject\disease-predection\saved_models\heart_model.sav','rb'))
-parkinsons_model = pickle.load(open('D:\pythonProject\disease-predection\saved_models\parkinsons_model.sav', 'rb'))
+diabetes_model = pickle.load(open(diabetes_model.sav', 'rb'))
+heart_disease_model = pickle.load(open('heart_model.sav','rb'))
+parkinsons_model = pickle.load(open('parkinsons_model.sav', 'rb'))
 
-options = ["Diabetes Prediction", "Heart Disease Prediction", "Parkinsons Prediction"]
-selected_option = st.sidebar.selectbox("Multiple Disease Prediction System", options)
+# sidebar for navigation
+with st.sidebar:
+    selected = option_menu('Multiple Disease Prediction System',
 
-st.write("You selected:", selected_option)
+                           ['Diabetes Prediction',
+                            'Heart Disease Prediction',
+                            'Parkinsons Prediction'],
+                           icons=['activity', 'heart', 'person'],
+                           default_index=0)
+
 
 # Diabetes Prediction Page
-if (selected_option == 'Diabetes Prediction'):
+if (selected == 'Diabetes Prediction'):
 
     # page title
     st.title('Diabetes Prediction using ML')
@@ -62,7 +68,7 @@ if (selected_option == 'Diabetes Prediction'):
     st.success(diab_diagnosis)
 
 # Heart Disease Prediction Page
-if (selected_option == 'Heart Disease Prediction'):
+if (selected == 'Heart Disease Prediction'):
 
     # page title
     st.title('Heart Disease Prediction using ML')
@@ -125,7 +131,7 @@ if (selected_option == 'Heart Disease Prediction'):
     st.success(heart_diagnosis)
 
 # Parkinson's Prediction Page
-if (selected_option == "Parkinsons Prediction"):
+if (selected == "Parkinsons Prediction"):
 
     # page title
     st.title("Parkinson's Disease Prediction using ML")
